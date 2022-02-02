@@ -1,7 +1,5 @@
-package com.michaelmarcal.commons;
+package com.michaelmarcal.commons.storm.composition;
 
-import com.michaelmarcal.commons.storm.composition.SeriesPoint;
-import com.michaelmarcal.commons.storm.composition.SeriesPointDirectional;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,6 +1,5 @@
-package com.michaelmarcal.commons;
+package com.michaelmarcal.commons.storm.composition;
 
-import com.michaelmarcal.commons.storm.composition.Precipitation;
 import org.junit.Assert;
 import org.junit.Test;
 

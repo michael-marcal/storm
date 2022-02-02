@@ -1,4 +1,4 @@
-package com.michaelmarcal.commons;
+package com.michaelmarcal.commons.storm.composition;
 
 import static org.junit.Assert.assertTrue;
 

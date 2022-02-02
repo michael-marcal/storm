@@ -1,13 +1,23 @@
 package com.michaelmarcal.commons;
 
+import com.michaelmarcal.commons.storm.composition.Storm;
+
+import java.util.Set;
+
 /**
- * Hello world!
+ * App for Storm
  *
  */
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Storm storm = new Storm();
+        storm.addReaddings( 10.0, 5.0, 32.0, 0.0);
+
+        Set<String> alerts = storm.getAlerts();
+        for ( String alert: alerts) {
+            System.out.println(alert);
+        }
     }
 }

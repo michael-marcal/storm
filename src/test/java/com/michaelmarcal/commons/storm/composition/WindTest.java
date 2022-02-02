@@ -1,7 +1,5 @@
-package com.michaelmarcal.commons;
+package com.michaelmarcal.commons.storm.composition;
 
-import com.michaelmarcal.commons.storm.composition.Wind;
-import com.sun.jdi.DoubleValue;
 import org.junit.Assert;
 import org.junit.Test;
 
