@@ -21,24 +21,10 @@ public class Temperature {
     }
 
     public Double getMaximumTemperature( ) {
-        return Collections.max(this.temperatures, (o1, o2) -> {
-            if( o1.getValue() > o2.getValue() ){
-                return 1;
-            } else if( o1.getValue() < o2.getValue() ) {
-                return -1;
-            }
-            return 0;
-        }).getValue();
+        return Collections.max( this.temperatures, SeriesPoint.compareSeriesPoint ).getValue();
     }
 
     public Double getMinimumTemperature( ) {
-        return Collections.min(this.temperatures, (o1, o2) -> {
-            if( o1.getValue() > o2.getValue() ){
-                return 1;
-            } else if( o1.getValue() < o2.getValue() ) {
-                return -1;
-            }
-            return 0;
-        }).getValue();
+        return Collections.min( this.temperatures, SeriesPoint.compareSeriesPoint ).getValue();
     }
 }

@@ -1,6 +1,7 @@
 package com.michaelmarcal.commons.storm.composition;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 
 import lombok.Getter;
 
@@ -15,4 +16,6 @@ public class SeriesPoint {
         this.value = value;
         this.timepoint = timepoint;
     }
+
+    public static Comparator<SeriesPoint> compareSeriesPoint = Comparator.comparing(SeriesPoint::getValue);
 }

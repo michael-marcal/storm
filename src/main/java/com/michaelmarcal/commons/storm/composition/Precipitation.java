@@ -1,7 +1,5 @@
 package com.michaelmarcal.commons.storm.composition;
 
-import lombok.AllArgsConstructor;
-
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Vector;
@@ -33,46 +31,18 @@ public class Precipitation {
     }
 
     public Double getMaximumPrecipitationRate( ) {
-        return Collections.max(this.precipiationRates, (o1, o2) -> {
-            if( o1.getValue() > o2.getValue() ){
-                return 1;
-            } else if( o1.getValue() < o2.getValue() ) {
-                return -1;
-            }
-            return 0;
-        }).getValue();
+        return Collections.max( this.precipiationRates, SeriesPoint.compareSeriesPoint ).getValue();
     }
 
     public Double getMinimumPrecipitationRate( ) {
-        return Collections.min(this.precipiationRates, (o1, o2) -> {
-            if( o1.getValue() > o2.getValue() ){
-                return 1;
-            } else if( o1.getValue() < o2.getValue() ) {
-                return -1;
-            }
-            return 0;
-        }).getValue();
+        return Collections.min( this.precipiationRates, SeriesPoint.compareSeriesPoint ).getValue();
     }
 
     public Double getMaximumPrecipitation( ) {
-        return Collections.max(this.precipitations, (o1, o2) -> {
-            if( o1.getValue() > o2.getValue() ){
-                return 1;
-            } else if( o1.getValue() < o2.getValue() ) {
-                return -1;
-            }
-            return 0;
-        }).getValue();
+        return Collections.max( this.precipitations, SeriesPoint.compareSeriesPoint ).getValue();
     }
 
     public Double getMinimumPrecipitation( ) {
-        return Collections.min(this.precipitations, (o1, o2) -> {
-            if( o1.getValue() > o2.getValue() ){
-                return 1;
-            } else if( o1.getValue() < o2.getValue() ) {
-                return -1;
-            }
-            return 0;
-        }).getValue();
+        return Collections.min( this.precipitations, SeriesPoint.compareSeriesPoint ).getValue();
     }
 }

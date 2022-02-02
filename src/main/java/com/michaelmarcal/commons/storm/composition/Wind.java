@@ -25,24 +25,10 @@ public class Wind {
     }
 
     public Double getMaximumWindSpeed() {
-        return Collections.max(this.windReadings, (o1, o2) -> {
-            if( o1.getValue() > o2.getValue() ){
-                return 1;
-            } else if( o1.getValue() < o2.getValue() ) {
-                return -1;
-            }
-            return 0;
-        }).getValue();
+        return Collections.max( this.windReadings, SeriesPoint.compareSeriesPoint ).getValue();
     }
 
     public Double getMinimumWindSpeed() {
-        return Collections.min(this.windReadings, (o1, o2) -> {
-            if( o1.getValue() > o2.getValue() ){
-                return 1;
-            } else if( o1.getValue() < o2.getValue() ) {
-                return -1;
-            }
-            return 0;
-        }).getValue();
+        return Collections.min( this.windReadings, SeriesPoint.compareSeriesPoint ).getValue();
     }
 }
