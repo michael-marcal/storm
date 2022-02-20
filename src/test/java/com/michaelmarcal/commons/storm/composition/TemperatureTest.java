@@ -1,12 +1,17 @@
 package com.michaelmarcal.commons.storm.composition;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class TemperatureTest {
+
+    @Rule
+    public ExpectedException exceptionRule = ExpectedException.none();
 
     @Test
     public void TestTemperature() {
@@ -61,5 +66,16 @@ public class TemperatureTest {
         Assert.assertEquals(0, alerts.size());
         Assert.assertEquals(0, temp.getActiveAlerts().size());
         Assert.assertEquals(1, temp.getHistoricalAlerts().size());
+    }
+
+    @Test
+    public void testIllegalAlertAddException() {
+        exceptionRule.expect(IllegalArgumentException.class);
+        exceptionRule.expectMessage("Alert Type must be TEMPERATURE.  Alert Type provided: WIND");
+        AlertFactory alertFactory = new AlertFactory();
+        Alert windAlert = alertFactory.getExceedsThresholdAlert(AlertType.WIND, 10.0, "High Wind");
+
+        Temperature temp = new Temperature();
+        temp.addAlert(windAlert);
     }
 }
