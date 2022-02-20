@@ -1,6 +1,6 @@
 package com.michaelmarcal.commons;
 
-import com.michaelmarcal.commons.storm.composition.Alert;
+import com.michaelmarcal.commons.storm.alert.Alert;
 import com.michaelmarcal.commons.storm.composition.Storm;
 
 import java.util.List;

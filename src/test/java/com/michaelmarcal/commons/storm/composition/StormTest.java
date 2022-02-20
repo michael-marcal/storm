@@ -1,5 +1,8 @@
 package com.michaelmarcal.commons.storm.composition;
 
+import com.michaelmarcal.commons.storm.alert.Alert;
+import com.michaelmarcal.commons.storm.alert.AlertFactory;
+import com.michaelmarcal.commons.storm.alert.AlertType;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,4 +1,8 @@
-package com.michaelmarcal.commons.storm.composition;
+package com.michaelmarcal.commons.storm.readings;
+
+import com.michaelmarcal.commons.storm.alert.Alert;
+import com.michaelmarcal.commons.storm.alert.AlertType;
+import com.michaelmarcal.commons.storm.alert.Alertable;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -6,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-public class Wind implements Alertable{
+public class Wind implements Alertable {
 
     private final Vector<SeriesPointDirectional> windReadings;
     private final List<Alert> alerts;

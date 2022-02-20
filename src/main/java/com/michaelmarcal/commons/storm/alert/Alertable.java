@@ -1,4 +1,6 @@
-package com.michaelmarcal.commons.storm.composition;
+package com.michaelmarcal.commons.storm.alert;
+
+import com.michaelmarcal.commons.storm.readings.SeriesPoint;
 
 import java.util.List;
 

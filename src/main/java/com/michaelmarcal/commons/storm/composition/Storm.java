@@ -1,5 +1,10 @@
 package com.michaelmarcal.commons.storm.composition;
 
+import com.michaelmarcal.commons.storm.alert.Alert;
+import com.michaelmarcal.commons.storm.readings.Precipitation;
+import com.michaelmarcal.commons.storm.readings.Temperature;
+import com.michaelmarcal.commons.storm.readings.Wind;
+
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Stream;
@@ -16,8 +21,8 @@ public class Storm {
         this.wind = new Wind();
     }
 
-    public List<Alert> addReadings( LocalDateTime time, Double windSpeed, Double windDirection,
-                             Double temperature, Double precipitation) {
+    public List<Alert> addReadings(LocalDateTime time, Double windSpeed, Double windDirection,
+                                   Double temperature, Double precipitation) {
         List<Alert> windAlerts = this.wind.addWindReading( time, windSpeed, windDirection );
         List<Alert> tempAlerts = this.temperature.addTemperaturePoint( time, temperature );
         List<Alert> precipitationAlerts = this.precipitation.addPrecipitationReading(time, precipitation);
