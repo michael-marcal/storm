@@ -1,23 +1,29 @@
 package com.michaelmarcal.commons.storm.composition;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Vector;
 
-public class Precipitation {
+public class Precipitation implements Alertable{
 
     private final Vector<SeriesPoint> precipitations;
-    private final Vector<SeriesPoint> precipiationRates;
+    private final Vector<SeriesPoint> precipitationRates;
+    private final List<Alert> alerts;
 
     public Precipitation( ) {
         this.precipitations = new Vector<>();
-        this.precipiationRates = new Vector<>();
+        this.precipitationRates = new Vector<>();
+        this.alerts = new ArrayList<>();
     }
 
-    public void addPrecipitationReading(LocalDateTime time, Double precipitation ){
+    public List<Alert> addPrecipitationReading(LocalDateTime time, Double precipitation ){
         Double latest = getLatestPrecipitation();
-        precipitations.add( new SeriesPoint(time, precipitation) );
-        precipiationRates.add( new SeriesPoint(time, precipitation - latest));
+        SeriesPoint sp = new SeriesPoint(time, precipitation);
+        precipitations.add( sp );
+        precipitationRates.add( new SeriesPoint(time, precipitation - latest));
+        return evaluateAlerts(sp);
     }
 
     public Double getLatestPrecipitation( ) {
@@ -27,15 +33,15 @@ public class Precipitation {
     }
 
     public Double getLatestPrecipitationRate( ) {
-        return precipiationRates.lastElement().getValue();
+        return precipitationRates.lastElement().getValue();
     }
 
     public Double getMaximumPrecipitationRate( ) {
-        return Collections.max( this.precipiationRates, SeriesPoint.compareSeriesPoint ).getValue();
+        return Collections.max( this.precipitationRates, SeriesPoint.compareSeriesPoint ).getValue();
     }
 
     public Double getMinimumPrecipitationRate( ) {
-        return Collections.min( this.precipiationRates, SeriesPoint.compareSeriesPoint ).getValue();
+        return Collections.min( this.precipitationRates, SeriesPoint.compareSeriesPoint ).getValue();
     }
 
     public Double getMaximumPrecipitation( ) {
@@ -45,4 +51,19 @@ public class Precipitation {
     public Double getMinimumPrecipitation( ) {
         return Collections.min( this.precipitations, SeriesPoint.compareSeriesPoint ).getValue();
     }
+
+    @Override
+    public void addAlert( Alert a ) {
+        if( a.getType() != AlertType.PRECIPITATION ){
+            throw new IllegalArgumentException( "Alert Type must be PRECIPITATION.  Alert Type provided: " +
+                    "" + a.getType() );
+        }
+        alerts.add(a);
+    }
+
+    @Override
+    public List<Alert> getAlerts() {
+        return alerts;
+    }
+
 }

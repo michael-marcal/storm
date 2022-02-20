@@ -1,66 +1,61 @@
 package com.michaelmarcal.commons.storm.composition;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class Storm {
 
-    private final Precipitation precipiation;
+    private final Precipitation precipitation;
     private final Temperature temperature;
     private final Wind wind;
 
     public Storm(){
-        this.precipiation = new Precipitation();
+        this.precipitation = new Precipitation();
         this.temperature = new Temperature();
         this.wind = new Wind();
     }
 
-    public void addReadings( LocalDateTime time, Double windSpeed, Double windDirection,
+    public List<Alert> addReadings( LocalDateTime time, Double windSpeed, Double windDirection,
                              Double temperature, Double precipitation) {
-        wind.addWindReading( time, windSpeed, windDirection );
-        this.temperature.addTemperaturePoint( time, temperature );
-        this.precipiation.addPrecipitationReading(time, precipitation);
+        List<Alert> windAlerts = this.wind.addWindReading( time, windSpeed, windDirection );
+        List<Alert> tempAlerts = this.temperature.addTemperaturePoint( time, temperature );
+        List<Alert> precipitationAlerts = this.precipitation.addPrecipitationReading(time, precipitation);
+        return Stream.of(windAlerts, tempAlerts, precipitationAlerts).flatMap(Collection::stream).toList();
     }
 
-    public void addReaddings( Double windSpeed, Double windDirection,
-                              Double temperature, Double precipitation) {
-        addReadings( LocalDateTime.now(), windSpeed, windDirection, temperature, precipitation);
+    public List<Alert> addReadings(Double windSpeed, Double windDirection,
+                            Double temperature, Double precipitation) {
+        return addReadings( LocalDateTime.now(), windSpeed, windDirection, temperature, precipitation);
     }
 
-    public Set<String> getAlerts() {
-        Set<String> alerts = new HashSet<>();
-        alerts.addAll(getWindAlerts());
-        alerts.addAll(getTemperatureAlerts());
-        alerts.addAll(getPrecipitationAlerts());
-        return alerts;
-    }
-
-    private Set<String> getWindAlerts() {
-        Set<String> windAlerts = new HashSet<>();
-        if( this.wind.getMaximumWindSpeed() > 35.0 ) {
-            windAlerts.add("High winds alert");
+    public void addAlert( Alert alert ) {
+        switch (alert.getType()) {
+            case WIND -> wind.addAlert(alert);
+            case TEMPERATURE -> temperature.addAlert(alert);
+            case PRECIPITATION -> precipitation.addAlert(alert);
+            default -> throw new IllegalArgumentException(alert.getType() + " is not a valid AlertType");
         }
-        return windAlerts;
     }
 
-    private Set<String> getTemperatureAlerts() {
-        Set<String> tempAlerts = new HashSet<>();
-        if( this.temperature.getLatestTemperature() < 33.0 ) {
-            tempAlerts.add( "Freezing temperature alert");
-        }
-        if( this.temperature.getLatestTemperature() > 90.0 ) {
-            tempAlerts.add( "Extreme heat alerat" );
-        }
-        return tempAlerts;
+    public List<Alert> getAlerts() {
+        return Stream.of(
+                    getWindAlerts(),
+                    getTemperatureAlerts(),
+                    getPrecipitationAlerts())
+                .flatMap(Collection::stream).toList();
     }
 
-    private Set<String> getPrecipitationAlerts() {
-        Set<String> precipAlerts = new HashSet<>();
-        if( this.precipiation.getMaximumPrecipitationRate() > 1.0 ) {
-            precipAlerts.add( "Flooding alert" );
-        }
-        return precipAlerts;
+    private List<Alert> getWindAlerts() {
+        return wind.getAlerts();
+    }
+
+    private List<Alert> getTemperatureAlerts() {
+        return temperature.getAlerts();
+    }
+
+    private List<Alert> getPrecipitationAlerts() {
+        return precipitation.getAlerts();
     }
 
 }
