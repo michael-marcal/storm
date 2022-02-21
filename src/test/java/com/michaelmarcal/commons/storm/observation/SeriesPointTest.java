@@ -1,9 +1,10 @@
 package com.michaelmarcal.commons.storm.observation;
 
-import org.junit.Assert;
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SeriesPointTest {
 
@@ -16,8 +17,10 @@ public class SeriesPointTest {
         LocalDateTime spTime = sp.getTimepoint();
         Double spValue = sp.getValue();
 
-        Assert.assertEquals(now, spTime);
-        Assert.assertEquals(val, spValue);
+        assertAll(
+                ()->assertEquals(now, spTime),
+                ()->assertEquals(val, spValue)
+        );
     }
 
     @Test
@@ -31,8 +34,10 @@ public class SeriesPointTest {
         Double spValue = sp.getValue();
         Double spDir = sp.getDirection();
 
-        Assert.assertEquals(now, spTime);
-        Assert.assertEquals(val, spValue);
-        Assert.assertEquals(dir, spDir);
+        assertAll(
+                ()->assertEquals(now, spTime),
+                ()->assertEquals(val, spValue),
+                ()->assertEquals(dir, spDir)
+        );
     }
 }

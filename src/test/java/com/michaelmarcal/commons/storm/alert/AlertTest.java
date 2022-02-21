@@ -1,11 +1,15 @@
 package com.michaelmarcal.commons.storm.alert;
 
 import com.michaelmarcal.commons.storm.observation.SeriesPoint;
-import org.junit.Assert;
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.function.Function;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class AlertTest {
 
@@ -16,14 +20,18 @@ public class AlertTest {
 
         LocalDateTime now = LocalDateTime.now();
         SeriesPoint sp = new SeriesPoint( now, 15);
-        Assert.assertTrue(a.evaluateAlert(sp));
 
-        Assert.assertEquals(sp, a.getAlertData() );
-        Assert.assertEquals(1, a.getHistoricalAlertData().size());
+        assertAll(
+                ()->assertTrue(a.evaluateAlert(sp)),
+                ()->assertEquals(sp, a.getAlertData() ),
+                ()->assertEquals(1, a.getHistoricalAlertData().size())
+        );
 
         SeriesPoint sp2 = new SeriesPoint( now, 8);
-        Assert.assertFalse(a.evaluateAlert(sp2));
-        Assert.assertNull(a.getAlertData());
-        Assert.assertEquals(1, a.getHistoricalAlertData().size());
+        assertAll(
+                ()->assertFalse(a.evaluateAlert(sp2)),
+                ()->assertNull(a.getAlertData()),
+                ()->assertEquals(1, a.getHistoricalAlertData().size())
+        );
     }
 }
