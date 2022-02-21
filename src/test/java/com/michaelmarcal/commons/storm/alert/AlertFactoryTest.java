@@ -1,6 +1,6 @@
 package com.michaelmarcal.commons.storm.alert;
 
-import com.michaelmarcal.commons.storm.readings.SeriesPoint;
+import com.michaelmarcal.commons.storm.observation.SeriesPoint;
 import org.junit.Assert;
 import org.junit.Test;
 

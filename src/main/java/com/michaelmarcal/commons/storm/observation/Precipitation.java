@@ -1,4 +1,4 @@
-package com.michaelmarcal.commons.storm.readings;
+package com.michaelmarcal.commons.storm.observation;
 
 import com.michaelmarcal.commons.storm.alert.Alert;
 import com.michaelmarcal.commons.storm.alert.AlertType;
@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-public class Precipitation implements Alertable {
+public class Precipitation implements Alertable, Observable {
 
     private final Vector<SeriesPoint> precipitations;
     private final Vector<SeriesPoint> precipitationRates;
@@ -48,14 +48,6 @@ public class Precipitation implements Alertable {
         return Collections.min( this.precipitationRates, SeriesPoint.compareSeriesPoint ).getValue();
     }
 
-    public Double getMaximumPrecipitation( ) {
-        return Collections.max( this.precipitations, SeriesPoint.compareSeriesPoint ).getValue();
-    }
-
-    public Double getMinimumPrecipitation( ) {
-        return Collections.min( this.precipitations, SeriesPoint.compareSeriesPoint ).getValue();
-    }
-
     @Override
     public void addAlert( Alert a ) {
         if( a.getType() != AlertType.PRECIPITATION ){
@@ -68,6 +60,11 @@ public class Precipitation implements Alertable {
     @Override
     public List<Alert> getAlerts() {
         return alerts;
+    }
+
+    @Override
+    public Vector<SeriesPoint> getObservations() {
+        return this.precipitations;
     }
 
 }

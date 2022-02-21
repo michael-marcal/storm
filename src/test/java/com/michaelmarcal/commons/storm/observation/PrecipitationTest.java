@@ -1,4 +1,4 @@
-package com.michaelmarcal.commons.storm.readings;
+package com.michaelmarcal.commons.storm.observation;
 
 import com.michaelmarcal.commons.storm.alert.Alert;
 import com.michaelmarcal.commons.storm.alert.AlertFactory;
@@ -24,27 +24,27 @@ public class PrecipitationTest {
 
         List<Alert> alerts = precipitation.addPrecipitationReading( now, 0.0);
         Assert.assertEquals(0, alerts.size());
-        Assert.assertEquals(0.0, precipitation.getLatestPrecipitation(), .001);
-        Assert.assertEquals(0.0, precipitation.getMaximumPrecipitation(), .001);
-        Assert.assertEquals(0.0, precipitation.getMinimumPrecipitation(), .001);
+        Assert.assertEquals(0.0, precipitation.getLatestObservationValue(), .001);
+        Assert.assertEquals(0.0, precipitation.getMaximumObservationValue(), .001);
+        Assert.assertEquals(0.0, precipitation.getMinimumObservationValue(), .001);
         Assert.assertEquals(0.0, precipitation.getLatestPrecipitationRate(), .001);
         Assert.assertEquals(0.0, precipitation.getMaximumPrecipitationRate(), .001);
         Assert.assertEquals(0.0, precipitation.getMinimumPrecipitationRate(), .001);
 
         alerts = precipitation.addPrecipitationReading( now.plusMinutes(15L), 0.2);
         Assert.assertEquals(0, alerts.size());
-        Assert.assertEquals(0.2, precipitation.getLatestPrecipitation(), .001);
-        Assert.assertEquals(0.2, precipitation.getMaximumPrecipitation(), .001);
-        Assert.assertEquals(0.0, precipitation.getMinimumPrecipitation(), .001);
+        Assert.assertEquals(0.2, precipitation.getLatestObservationValue(), .001);
+        Assert.assertEquals(0.2, precipitation.getMaximumObservationValue(), .001);
+        Assert.assertEquals(0.0, precipitation.getMinimumObservationValue(), .001);
         Assert.assertEquals(0.2, precipitation.getLatestPrecipitationRate(), .001);
         Assert.assertEquals(0.2, precipitation.getMaximumPrecipitationRate(), .001);
         Assert.assertEquals(0.0, precipitation.getMinimumPrecipitationRate(), .001);
 
         alerts = precipitation.addPrecipitationReading( now.plusMinutes(15L), 0.3);
         Assert.assertEquals(0, alerts.size());
-        Assert.assertEquals(0.3, precipitation.getLatestPrecipitation(), .001);
-        Assert.assertEquals(0.3, precipitation.getMaximumPrecipitation(), .001);
-        Assert.assertEquals(0.0, precipitation.getMinimumPrecipitation(), .001);
+        Assert.assertEquals(0.3, precipitation.getLatestObservationValue(), .001);
+        Assert.assertEquals(0.3, precipitation.getMaximumObservationValue(), .001);
+        Assert.assertEquals(0.0, precipitation.getMinimumObservationValue(), .001);
         Assert.assertEquals(0.1, precipitation.getLatestPrecipitationRate(), .001);
         Assert.assertEquals(0.2, precipitation.getMaximumPrecipitationRate(), .001);
         Assert.assertEquals(0.0, precipitation.getMinimumPrecipitationRate(), .001);

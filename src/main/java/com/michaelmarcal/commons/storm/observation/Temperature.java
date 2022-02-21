@@ -1,4 +1,4 @@
-package com.michaelmarcal.commons.storm.readings;
+package com.michaelmarcal.commons.storm.observation;
 
 import com.michaelmarcal.commons.storm.alert.Alert;
 import com.michaelmarcal.commons.storm.alert.AlertType;
@@ -6,11 +6,10 @@ import com.michaelmarcal.commons.storm.alert.Alertable;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-public class Temperature implements Alertable {
+public class Temperature implements Alertable, Observable {
 
     private final Vector<SeriesPoint> temperatures;
     private final List<Alert> alerts;
@@ -26,18 +25,6 @@ public class Temperature implements Alertable {
         return evaluateAlerts( sp );
     }
 
-    public Double getLatestTemperature( ) {
-        return temperatures.lastElement().getValue();
-    }
-
-    public Double getMaximumTemperature( ) {
-        return Collections.max( this.temperatures, SeriesPoint.compareSeriesPoint ).getValue();
-    }
-
-    public Double getMinimumTemperature( ) {
-        return Collections.min( this.temperatures, SeriesPoint.compareSeriesPoint ).getValue();
-    }
-
     @Override
     public void addAlert( Alert a ) {
         if( a.getType() != AlertType.TEMPERATURE ){
@@ -50,5 +37,10 @@ public class Temperature implements Alertable {
     @Override
     public List<Alert> getAlerts() {
         return alerts;
+    }
+
+    @Override
+    public Vector<SeriesPoint> getObservations() {
+        return this.temperatures;
     }
 }

@@ -1,4 +1,4 @@
-package com.michaelmarcal.commons.storm.readings;
+package com.michaelmarcal.commons.storm.observation;
 
 import lombok.Getter;
 

@@ -1,9 +1,9 @@
 package com.michaelmarcal.commons.storm.composition;
 
 import com.michaelmarcal.commons.storm.alert.Alert;
-import com.michaelmarcal.commons.storm.readings.Precipitation;
-import com.michaelmarcal.commons.storm.readings.Temperature;
-import com.michaelmarcal.commons.storm.readings.Wind;
+import com.michaelmarcal.commons.storm.observation.Precipitation;
+import com.michaelmarcal.commons.storm.observation.Temperature;
+import com.michaelmarcal.commons.storm.observation.Wind;
 
 import java.time.LocalDateTime;
 import java.util.*;

@@ -1,4 +1,4 @@
-package com.michaelmarcal.commons.storm.readings;
+package com.michaelmarcal.commons.storm.observation;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;

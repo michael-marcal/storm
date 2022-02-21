@@ -1,6 +1,6 @@
 package com.michaelmarcal.commons.storm.alert;
 
-import com.michaelmarcal.commons.storm.readings.SeriesPoint;
+import com.michaelmarcal.commons.storm.observation.SeriesPoint;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

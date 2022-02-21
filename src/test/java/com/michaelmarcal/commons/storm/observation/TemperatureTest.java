@@ -1,4 +1,4 @@
-package com.michaelmarcal.commons.storm.readings;
+package com.michaelmarcal.commons.storm.observation;
 
 import com.michaelmarcal.commons.storm.alert.Alert;
 import com.michaelmarcal.commons.storm.alert.AlertFactory;
@@ -23,15 +23,15 @@ public class TemperatureTest {
 
         List<Alert> alerts = temp.addTemperaturePoint(now, 10.0);
         Assert.assertEquals(0, alerts.size());
-        Assert.assertEquals(Double.valueOf(10.0), temp.getLatestTemperature());
-        Assert.assertEquals(Double.valueOf(10.0), temp.getMaximumTemperature());
-        Assert.assertEquals(Double.valueOf(10.0), temp.getMinimumTemperature());
+        Assert.assertEquals(Double.valueOf(10.0), temp.getLatestObservationValue());
+        Assert.assertEquals(Double.valueOf(10.0), temp.getMaximumObservationValue());
+        Assert.assertEquals(Double.valueOf(10.0), temp.getMinimumObservationValue());
 
         alerts = temp.addTemperaturePoint(now.plusMinutes(15L), 11.0);
         Assert.assertEquals(0, alerts.size());
-        Assert.assertEquals(Double.valueOf(11.0), temp.getLatestTemperature());
-        Assert.assertEquals(Double.valueOf(11.0), temp.getMaximumTemperature());
-        Assert.assertEquals(Double.valueOf(10.0), temp.getMinimumTemperature());
+        Assert.assertEquals(Double.valueOf(11.0), temp.getLatestObservationValue());
+        Assert.assertEquals(Double.valueOf(11.0), temp.getMaximumObservationValue());
+        Assert.assertEquals(Double.valueOf(10.0), temp.getMinimumObservationValue());
 
         alerts = temp.addTemperaturePoint(now.plusMinutes(15L), 12.0);
         Assert.assertEquals(0, alerts.size());
@@ -39,13 +39,13 @@ public class TemperatureTest {
         Assert.assertEquals(0, alerts.size());
         alerts = temp.addTemperaturePoint(now.plusMinutes(15L), 14.0);
         Assert.assertEquals(0, alerts.size());
-        Assert.assertEquals(Double.valueOf(14.0), temp.getLatestTemperature());
-        Assert.assertEquals(Double.valueOf(14.0), temp.getMaximumTemperature());
-        Assert.assertEquals(Double.valueOf(10.0), temp.getMinimumTemperature());
+        Assert.assertEquals(Double.valueOf(14.0), temp.getLatestObservationValue());
+        Assert.assertEquals(Double.valueOf(14.0), temp.getMaximumObservationValue());
+        Assert.assertEquals(Double.valueOf(10.0), temp.getMinimumObservationValue());
 
         alerts = temp.addTemperaturePoint(now.plusMinutes(15L), 8.0);
         Assert.assertEquals(0, alerts.size());
-        Assert.assertEquals(Double.valueOf(8.0), temp.getMinimumTemperature());
+        Assert.assertEquals(Double.valueOf(8.0), temp.getMinimumObservationValue());
     }
 
     @Test

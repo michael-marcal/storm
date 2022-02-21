@@ -1,4 +1,4 @@
-package com.michaelmarcal.commons.storm.readings;
+package com.michaelmarcal.commons.storm.observation;
 
 import com.michaelmarcal.commons.storm.alert.Alert;
 import com.michaelmarcal.commons.storm.alert.AlertFactory;
@@ -23,17 +23,17 @@ public class WindTest {
 
         List<Alert> alerts = wind.addWindReading(now, 10.0, 15.0);
         Assert.assertEquals(0, alerts.size());
-        Assert.assertEquals(10.0, wind.getLatestWindSpeed(), .001);
+        Assert.assertEquals(10.0, wind.getLatestObservationValue(), .001);
         Assert.assertEquals(15.0, wind.getLatestWindDirection(), .001);
-        Assert.assertEquals(10.0, wind.getMaximumWindSpeed(), .001);
-        Assert.assertEquals(10.0, wind.getMinimumWindSpeed(), .001);
+        Assert.assertEquals(10.0, wind.getMaximumObservationValue(), .001);
+        Assert.assertEquals(10.0, wind.getMinimumObservationValue(), .001);
 
         wind.addWindReading(now, 15.0, 20.0);
         Assert.assertEquals(0, alerts.size());
-        Assert.assertEquals(15.0, wind.getLatestWindSpeed(), .001);
+        Assert.assertEquals(15.0, wind.getLatestObservationValue(), .001);
         Assert.assertEquals(20.0, wind.getLatestWindDirection(), .001);
-        Assert.assertEquals(15.0, wind.getMaximumWindSpeed(), .001);
-        Assert.assertEquals(10.0, wind.getMinimumWindSpeed(), .001);
+        Assert.assertEquals(15.0, wind.getMaximumObservationValue(), .001);
+        Assert.assertEquals(10.0, wind.getMinimumObservationValue(), .001);
     }
 
     @Test

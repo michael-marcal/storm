@@ -1,4 +1,4 @@
-package com.michaelmarcal.commons.storm.readings;
+package com.michaelmarcal.commons.storm.observation;
 
 import com.michaelmarcal.commons.storm.alert.Alert;
 import com.michaelmarcal.commons.storm.alert.AlertType;
@@ -6,11 +6,10 @@ import com.michaelmarcal.commons.storm.alert.Alertable;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-public class Wind implements Alertable {
+public class Wind implements Alertable, Observable {
 
     private final Vector<SeriesPointDirectional> windReadings;
     private final List<Alert> alerts;
@@ -26,20 +25,8 @@ public class Wind implements Alertable {
         return evaluateAlerts( sp );
     }
 
-    public Double getLatestWindSpeed() {
-        return windReadings.lastElement().getValue();
-    }
-
     public Double getLatestWindDirection() {
         return windReadings.lastElement().getDirection();
-    }
-
-    public Double getMaximumWindSpeed() {
-        return Collections.max( this.windReadings, SeriesPoint.compareSeriesPoint ).getValue();
-    }
-
-    public Double getMinimumWindSpeed() {
-        return Collections.min( this.windReadings, SeriesPoint.compareSeriesPoint ).getValue();
     }
 
     @Override
@@ -54,5 +41,10 @@ public class Wind implements Alertable {
     @Override
     public List<Alert> getAlerts() {
         return alerts;
+    }
+
+    @Override
+    public Vector<SeriesPointDirectional> getObservations() {
+        return this.windReadings;
     }
 }
