@@ -127,6 +127,8 @@
                   <excludes>
                     <!-- Main method for now-->
                     <exclude>com.michaelmarcal.commons</exclude>
+                    <!-- Not enough lines of code for now-->
+                    <exclude>com.michaelmarcal.commons.storm.data.consumer</exclude>
                   </excludes>
                 </rule>
               </rules>

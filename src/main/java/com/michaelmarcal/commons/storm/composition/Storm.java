@@ -21,17 +21,22 @@ public class Storm {
         this.wind = new Wind();
     }
 
-    public List<Alert> addReadings(LocalDateTime time, Double windSpeed, Double windDirection,
+    public List<Alert> addReadings( Reading reading ){
+        return addReadings(
+                reading.getTime(),
+                reading.getWindSpeed(),
+                reading.getWindDirection(),
+                reading.getTemperature(),
+                reading.getPrecipitation()
+        );
+    }
+
+    private List<Alert> addReadings(LocalDateTime time, Double windSpeed, Double windDirection,
                                    Double temperature, Double precipitation) {
         List<Alert> windAlerts = this.wind.addWindReading( time, windSpeed, windDirection );
         List<Alert> tempAlerts = this.temperature.addTemperaturePoint( time, temperature );
         List<Alert> precipitationAlerts = this.precipitation.addPrecipitationReading(time, precipitation);
         return Stream.of(windAlerts, tempAlerts, precipitationAlerts).flatMap(Collection::stream).toList();
-    }
-
-    public List<Alert> addReadings(Double windSpeed, Double windDirection,
-                            Double temperature, Double precipitation) {
-        return addReadings( LocalDateTime.now(), windSpeed, windDirection, temperature, precipitation);
     }
 
     public void addAlert( Alert alert ) {

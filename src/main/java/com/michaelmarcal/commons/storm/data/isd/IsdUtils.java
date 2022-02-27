@@ -6,6 +6,7 @@ import lombok.experimental.UtilityClass;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @UtilityClass
 public class IsdUtils {
@@ -22,6 +23,6 @@ public class IsdUtils {
     }
 
     private static List<IsdBean> filterIsdDataForSource( String source, List<IsdBean> data ) {
-        return data.stream().filter(d-> Objects.equals(d.getDataSourceFlag(), source)).toList();
+        return data.stream().filter(d-> Objects.equals(d.getDataSourceFlag(), source)).collect(Collectors.toList());
     }
 }

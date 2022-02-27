@@ -3,8 +3,6 @@ package com.michaelmarcal.commons.storm.data;
 import com.michaelmarcal.commons.storm.TestHelpers;
 import com.michaelmarcal.commons.storm.data.isd.IsdBean;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

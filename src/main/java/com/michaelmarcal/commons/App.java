@@ -1,8 +1,10 @@
 package com.michaelmarcal.commons;
 
 import com.michaelmarcal.commons.storm.alert.Alert;
+import com.michaelmarcal.commons.storm.composition.Reading;
 import com.michaelmarcal.commons.storm.composition.Storm;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -14,9 +16,10 @@ public class App
     public static void main( String[] args )
     {
         Storm storm = new Storm();
-        storm.addReadings( 10.0, 5.0, 32.0, 0.0);
+        List<Alert> alerts = storm.addReadings(
+                new Reading(LocalDateTime.now(), 10.0, 5.0, 32.0, 0.0)
+        );
 
-        List<Alert> alerts = storm.getAlerts();
         for ( Alert alert: alerts) {
             System.out.println(alert);
         }
