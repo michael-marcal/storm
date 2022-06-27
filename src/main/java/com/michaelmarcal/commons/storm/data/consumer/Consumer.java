@@ -17,6 +17,9 @@ public class Consumer implements Runnable{
     private Processor processor;
 
     @Getter
+    private final AtomicInteger messageErrors = new AtomicInteger();
+
+    @Getter
     private final AtomicInteger messagesConsumed = new AtomicInteger();
 
     @Override
@@ -27,8 +30,11 @@ public class Consumer implements Runnable{
                 processMessage(element);
                 messagesConsumed.incrementAndGet();
             }
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ie) {
+            ie.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
+            messageErrors.incrementAndGet();
         }
     }
 
